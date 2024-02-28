@@ -7,6 +7,27 @@
  * :last editor: PakJeon
  * :date last edited: 2021-07-22 16:12:53
  */
+/**
+ * 模拟 call 实现
+ */
+Function.prototype.call2 = function (context) {
+	context.fn = this;
+	context.fn();
+	delete context.fn;
+}
+
+Function.prototype.call2 = function (context) {
+	context.fn = this;
+	var args = [];
+	for (var i = 1; len = arguments.length; i < len; i++) {
+		args.push('arguments[' + 'i' + ']');
+	}
+	var res = eval('context.fn(' + args + ')');
+
+	delete context.fn;
+	return res;
+}
+
 Function.prototype.myCall = function (context) {
 	const tmpContext = context || window;  // this参数可能传null，当为null时指向window
 	tmpContext.fn = this; // 在被指向的对象context上增加属性fn，并赋值为当前想执行的函数
